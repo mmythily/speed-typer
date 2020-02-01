@@ -6,6 +6,9 @@ function App() {
   //track the text in the textarea on each keystroke
   const [textInput, setTextInput] = useState('')
   const [timeRemain, setTimeRemain] = useState(3)
+  const [isTimeRunning, setIsTimeRunning] = useState(false)
+  const [wordCount, setWordCount] = useState(0)
+
   
   function handleChange (event) {
     const {value} = event.target
@@ -13,19 +16,22 @@ function App() {
   }
 
   //calculate the number of words in the textInput
-  function countWords(textInput){
+  function calculateWords(textInput){
     let wordsArr = textInput.trim().split(' ')
     return wordsArr.length;
   }
 
-  //render time remaining
+  //render remaining countdown time in seconds
   useEffect(() => {
-    if(timeRemain >0) {
+    if(isTimeRunning && timeRemain > 0) {
       setTimeout(() => {
         setTimeRemain(time => time -1)
       }, 1000)
+    } else if(timeRemain===0){
+      setIsTimeRunning(false)
+      setWordCount(calculateWords(textInput))
     }
-  }, [timeRemain])
+  }, [timeRemain, isTimeRunning])
 
   return (
     <div className="App" >
@@ -33,10 +39,9 @@ function App() {
       <textarea 
         onChange={handleChange}
         value={textInput}/>
-      <button onClick={() => console.log(countWords(textInput))}> Start </button>
+      <button onClick={() => setIsTimeRunning(true)}> Start </button>
       <p>Time Remaining: {timeRemain}</p>
-      <p> Word Count: </p>
-      <p> Character Count: {textInput.length}</p>
+      <p> Word Count: {wordCount}</p>
     </div>
   );
 }

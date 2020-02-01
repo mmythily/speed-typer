@@ -3,13 +3,25 @@ import './App.css';
 
 function App() {
 
+  const TIME_TO_TYPE = 5
+
   //track the text in the textarea on each keystroke
   const [textInput, setTextInput] = useState('')
-  const [timeRemain, setTimeRemain] = useState(3)
+  const [timeRemain, setTimeRemain] = useState(TIME_TO_TYPE)
   const [isTimeRunning, setIsTimeRunning] = useState(false)
   const [wordCount, setWordCount] = useState(0)
 
+  function startGame() {
+    setIsTimeRunning(true)
+    setTimeRemain(TIME_TO_TYPE)
+    setTextInput('')
+  }
   
+  function endGame(){
+    setIsTimeRunning(false)
+    setWordCount(calculateWords(textInput))
+  }
+
   function handleChange (event) {
     const {value} = event.target
     setTextInput(value)
@@ -28,18 +40,25 @@ function App() {
         setTimeRemain(time => time -1)
       }, 1000)
     } else if(timeRemain===0){
-      setIsTimeRunning(false)
-      setWordCount(calculateWords(textInput))
+      endGame()
     }
   }, [timeRemain, isTimeRunning])
 
   return (
     <div className="App" >
       <h1>SPEED TYPER</h1>
+      
       <textarea 
         onChange={handleChange}
-        value={textInput}/>
-      <button onClick={() => setIsTimeRunning(true)}> Start </button>
+        value={textInput}
+        disabled={!isTimeRunning}
+      />
+      
+      <button 
+        onClick={startGame}
+        disabled={isTimeRunning}
+      > Start </button>
+
       <p>Time Remaining: {timeRemain}</p>
       <p> Word Count: {wordCount}</p>
     </div>

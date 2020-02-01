@@ -21,6 +21,10 @@ textarea {
   font-size: x-large;
 }
 
+textarea:disabled {
+  background-color: #580101;
+}
+
 button {
   color: #61dafb;
   font-size: 2em;
@@ -30,4 +34,10 @@ button {
   background: #00b800;
   padding: 10px 20px;
   text-transform: uppercase;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background: #000800;
+  color: #999;
 }

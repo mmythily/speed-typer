@@ -59,7 +59,7 @@ function App() {
         disabled={!isTimeRunning}
         placeholder="How many words can you type in 10 seconds?"
       />
-      <div class="buttons">
+      <div className="buttons">
       <button 
         onClick={startGame}
         disabled={isTimeRunning}

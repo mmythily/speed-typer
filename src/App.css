@@ -23,7 +23,6 @@ textarea {
 textarea:disabled {
   background-color: #ee9797;
   font-size: 2em;
-
 }
 
 button {
@@ -47,6 +46,12 @@ button:disabled {
 
 .buttons{
   display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 420px) {
+  .buttons{
+    display:block;
+  }
 }
 
 #reset {
@@ -58,7 +63,6 @@ button:disabled {
   background: #000000;
   color: rgb(255, 255, 255);
 }
-
 .stats span{
   display: flex;
   justify-content: center;

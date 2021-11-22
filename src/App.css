@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -16,28 +15,52 @@ h1 {
 }
 
 textarea {
-  height:200px;
+  height:50vh;
   width:70%;
-  font-size: x-large;
+  font-size: 2em;
 }
 
 textarea:disabled {
-  background-color: #580101;
+  background-color: #ee9797;
+  font-size: 2em;
+
 }
 
 button {
-  color: #61dafb;
+  color: #ffffff;
   font-size: 2em;
   display: block;
-  margin: 5px auto;
+  margin: 20px 10px;
   border: none;
   background: #00b800;
-  padding: 10px 20px;
+  border: 10px #013f01;
+  padding: 10px 40px;
   text-transform: uppercase;
+  border-radius: 10px;
 }
 
 button:disabled {
   cursor: not-allowed;
   background: #000800;
   color: #999;
+}
+
+.buttons{
+  display: flex;
+}
+
+#reset {
+  font-size: 1.5em;
+  background: #f36e6e;
+}
+#reset:disabled {
+  cursor: not-allowed;
+  background: #000000;
+  color: rgb(255, 255, 255);
+}
+
+.stats span{
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
 }

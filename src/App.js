@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
 
-  const TIME_TO_TYPE = 5
+  const TIME_TO_TYPE = 10
 
   //track the text in the textarea on each keystroke
   const [textInput, setTextInput] = useState('')
@@ -15,6 +15,7 @@ function App() {
     setIsTimeRunning(true)
     setTimeRemain(TIME_TO_TYPE)
     setTextInput('')
+    setWordCount(0)
   }
   
   function endGame(){
@@ -25,6 +26,9 @@ function App() {
   function handleChange (event) {
     const {value} = event.target
     setTextInput(value)
+  }
+  function reset (){
+    setIsTimeRunning(false)
   }
 
   //calculate the number of words in the textInput
@@ -41,26 +45,32 @@ function App() {
       }, 1000)
     } else if(timeRemain===0){
       endGame()
+    
     }
-  }, [timeRemain, isTimeRunning])
+  }, [isTimeRunning, timeRemain])
 
   return (
     <div className="App" >
-      <h1>SPEED TYPER</h1>
+      <h1>Speed Typer</h1>
       
       <textarea 
         onChange={handleChange}
         value={textInput}
         disabled={!isTimeRunning}
+        placeholder="How many words can you type in 10 seconds?"
       />
-      
+      <div class="buttons">
       <button 
         onClick={startGame}
         disabled={isTimeRunning}
       > Start </button>
-
-      <p>Time Remaining: {timeRemain}</p>
-      <p> Word Count: {wordCount}</p>
+      <button id="reset"
+        onClick={reset}
+        disabled={!isTimeRunning}
+      > Reset </button>
+      </div>
+      <div className="stats"><span>Time Remaining: {timeRemain} seconds</span>
+      <span> Word Count: {wordCount} words</span></div>
     </div>
   );
 }
